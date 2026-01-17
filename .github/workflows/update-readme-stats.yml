@@ -48,13 +48,14 @@ jobs:
                       start_idx = i
                       break
               
-              # Strip leading whitespace from the first non-empty line
-              if start_idx < len(lines):
+              # Only process if we found a non-empty line
+              if start_idx < len(lines) and lines[start_idx].strip():
+                  # Strip leading whitespace from the first non-empty line
                   lines[start_idx] = lines[start_idx].lstrip()
-              
-              # Write back starting from the first non-empty line
-              with open(filename, 'w') as f:
-                  f.writelines(lines[start_idx:])
+                  
+                  # Write back starting from the first non-empty line
+                  with open(filename, 'w') as f:
+                      f.writelines(lines[start_idx:])
           EOF
 
       - name: Commit cards
