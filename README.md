@@ -7,9 +7,9 @@
 
 #### 📈 GitHub Stats
 
-![pacnpal's GitHub stats](https://github-readme-stats.vercel.app/api?username=pacnpal&show_icons=true&theme=radical)
+![pacnpal's GitHub stats](./profile/stats.svg)
 
-![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=pacnpal&layout=compact&theme=radical)
+![Top Langs](./profile/top-langs.svg)
 
 ---
 
