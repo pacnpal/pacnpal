@@ -30,27 +30,25 @@ jobs:
         run: |
           # Remove leading whitespace from SVG files so they render properly on GitHub
           python3 << 'EOF'
-          import glob
+          filename = 'profile/trophy.svg'
+          with open(filename, 'r') as f:
+              lines = f.readlines()
           
-          for filename in glob.glob('profile/trophy.svg'):
-              with open(filename, 'r') as f:
-                  lines = f.readlines()
+          # Skip to the first non-empty line
+          start_idx = None
+          for i, line in enumerate(lines):
+              if line.strip():
+                  start_idx = i
+                  break
+          
+          # Only process if we found a non-empty line
+          if start_idx is not None:
+              # Strip leading whitespace from the first non-empty line
+              lines[start_idx] = lines[start_idx].lstrip()
               
-              # Skip to the first non-empty line
-              start_idx = None
-              for i, line in enumerate(lines):
-                  if line.strip():
-                      start_idx = i
-                      break
-              
-              # Only process if we found a non-empty line
-              if start_idx is not None:
-                  # Strip leading whitespace from the first non-empty line
-                  lines[start_idx] = lines[start_idx].lstrip()
-                  
-                  # Write back starting from the first non-empty line
-                  with open(filename, 'w') as f:
-                      f.writelines(lines[start_idx:])
+              # Write back starting from the first non-empty line
+              with open(filename, 'w') as f:
+                  f.writelines(lines[start_idx:])
           EOF
 
       - name: Commit trophy
@@ -58,5 +56,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add profile/trophy.svg
-          git commit -m "Update trophy" || exit 0
+          git commit -m "Update trophy.svg with latest achievements" || exit 0
           git push
