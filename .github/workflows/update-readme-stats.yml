@@ -31,6 +31,33 @@ jobs:
           path: profile/top-langs.svg
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Fix SVG formatting
+        run: |
+          # Remove leading whitespace from SVG files so they render properly on GitHub
+          python3 << 'EOF'
+          import glob
+          
+          for filename in glob.glob('profile/*.svg'):
+              with open(filename, 'r') as f:
+                  lines = f.readlines()
+              
+              # Skip to the first non-empty line
+              start_idx = None
+              for i, line in enumerate(lines):
+                  if line.strip():
+                      start_idx = i
+                      break
+              
+              # Only process if we found a non-empty line
+              if start_idx is not None:
+                  # Strip leading whitespace from the first non-empty line
+                  lines[start_idx] = lines[start_idx].lstrip()
+                  
+                  # Write back starting from the first non-empty line
+                  with open(filename, 'w') as f:
+                      f.writelines(lines[start_idx:])
+          EOF
+
       - name: Commit cards
         run: |
           git config user.name "github-actions[bot]"
