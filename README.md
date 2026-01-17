@@ -14,7 +14,8 @@
 ---
 
 #### 🏆 GitHub Trophies
-
+<!-- Trophy images provided by github-profile-trophy (external service) -->
+<!-- Note: This may occasionally be unavailable due to service load -->
 ![trophy](https://github-profile-trophy.vercel.app/?username=pacnpal&theme=onedark)
 
 ---
