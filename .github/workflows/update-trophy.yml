@@ -17,12 +17,31 @@ jobs:
 
       - name: Generate trophy image
         run: |
-          # Fetch the trophy SVG from the service
-          curl -s "https://github-profile-trophy.vercel.app/?username=${{ github.repository_owner }}&theme=onedark&column=7&margin-w=15&margin-h=15" -o profile/trophy.svg
+          # Fetch the trophy SVG from the service with fallback URLs
+          TROPHY_PARAMS="username=${{ github.repository_owner }}&theme=onedark&column=7&margin-w=15&margin-h=15"
           
-          # Verify the file was created and has content
-          if [ ! -s profile/trophy.svg ]; then
-            echo "Error: trophy.svg was not created or is empty"
+          # Try main endpoint first, then fallback endpoints
+          ENDPOINTS=(
+            "https://github-profile-trophy.vercel.app"
+            "https://github-profile-trophy-liard-delta.vercel.app"
+            "https://github-profile-trophy-fork-two.vercel.app"
+            "https://github-profile-trophy-winning.vercel.app"
+          )
+          
+          SUCCESS=false
+          for ENDPOINT in "${ENDPOINTS[@]}"; do
+            echo "Trying endpoint: $ENDPOINT"
+            if curl -s -f "$ENDPOINT/?$TROPHY_PARAMS" -o profile/trophy.svg && [ -s profile/trophy.svg ]; then
+              echo "Successfully fetched trophy from $ENDPOINT"
+              SUCCESS=true
+              break
+            else
+              echo "Failed to fetch from $ENDPOINT, trying next..."
+            fi
+          done
+          
+          if [ "$SUCCESS" = false ]; then
+            echo "Error: Failed to fetch trophy.svg from all endpoints"
             exit 1
           fi
 
