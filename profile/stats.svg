@@ -8,7 +8,7 @@
         aria-labelledby="descId"
       >
         <title id="titleId">pacnpal's GitHub Stats, Rank: B+</title>
-        <desc id="descId">Total Stars Earned: 12, Total Commits  (last year) : 1344, Total PRs: 142, Total Issues: 16, Contributed to (last year): 15</desc>
+        <desc id="descId">Total Stars Earned: 12, Total Commits  (last year) : 1332, Total PRs: 145, Total Issues: 16, Contributed to (last year): 14</desc>
         <style>
           .header {
             font: 600 18px 'Segoe UI', Ubuntu, Sans-Serif;
@@ -72,7 +72,7 @@
         stroke-dashoffset: 251.32741228718345;
       }
       to {
-        stroke-dashoffset: 112.44291414467416;
+        stroke-dashoffset: 112.11957479831972;
       }
     }
   
@@ -191,7 +191,7 @@
         x="219.01"
         y="12.5"
         data-testid="prs"
-      >142</text>
+      >145</text>
     </g>
   </g><g transform="translate(0, 75)">
     <g class="stagger" style="animation-delay: 900ms" transform="translate(25, 0)">
@@ -221,7 +221,7 @@
         x="219.01"
         y="12.5"
         data-testid="contribs"
-      >15</text>
+      >14</text>
     </g>
   </g>
     </svg>
