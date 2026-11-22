@@ -57,7 +57,9 @@ jobs:
           theme: onedark
 
       - name: Strip leading whitespace so GitHub renders the SVGs
-        run: sed -i '/./,$!d; 1s/^[[:space:]]*//' profile/*.svg
+        run: |
+          sed -i '/./,$!d' profile/*.svg
+          sed -i '1s/^[[:space:]]*//' profile/*.svg
 
       - name: Commit cards
         run: |
